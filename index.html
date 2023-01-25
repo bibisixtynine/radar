@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>radar</title>
+
+    <!-- pwa -->
+    <meta
+      name="viewport"
+      content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="theme-color" content="#9480FF" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://cdn.glitch.global/1a69196f-7dd1-48fa-8c13-3cd2b83bae7a/draw-69.png?v=1645921642438"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://cdn.glitch.global/1a69196f-7dd1-48fa-8c13-3cd2b83bae7a/draw-69.png?v=1645921642438"
+    />
+
+    <!-- PWA setup - update public/sw.js if you add your own assets like a new .css file -->
+    <link rel="manifest" href="manifest.json" />
+    <script>
+      if (location.protocol == "http:") location.protocol = "https:";
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("sw.js")
+          .then((reg) => console.log("Service Worker registered", reg))
+          .catch((err) =>
+            console.error("Service Worker **not** registered", err)
+          );
+      } else {
+        console.warn("Service Worker not supported in this browser");
+      }
+    </script>
+
+    <style>
+      html,
+      body {
+        overflow: hidden;
+        background-color: rgb(0, 0, 0);
+        padding: 0;
+        margin: 0;
+        cursor: crosshair;
+      }
+    </style>
+
+    <script src="p5.min.js"></script>
+    <script src="sketch2.js"></script>
+
+    <script>
+      function BlockMove(event) {
+        event.preventDefault();
+      }
+      // disable all gestures...
+      window.addEventListener("gesturestart", (e) => e.preventDefault());
+      window.addEventListener("gesturechange", (e) => e.preventDefault());
+      window.addEventListener("gestureend", (e) => e.preventDefault());
+      // increase window size ... especially usefull for iphone with notch
+      // ... but also strangelly ipad...
+      document.children[0].style.height = "110%";
+    </script>
+  </head>
+
+  <body
+    ontouchmove="BlockMove(event);"
+    onorientationchange="updateOrientation();"
+  ></body>
+</html>
